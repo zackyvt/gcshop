@@ -9,7 +9,7 @@ function FooterSection(props: FooterSectionProps) {
             <p className="font-bold text-sm mr-16 mb-2.5">{ props.name }</p>
             <div className="flex flex-col">
                 {
-                    props.links.map((x) => <a className="text-xs mb-1 transition-all hover:font-bold cursor-pointer">{x}</a>)
+                    props.links.map((x, iter) => <a key={iter} className="text-xs mb-1 transition-all hover:font-bold cursor-pointer">{x}</a>)
                 }
             </div>
         </div>

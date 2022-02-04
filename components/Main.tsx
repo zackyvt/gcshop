@@ -53,8 +53,8 @@ function ItemsTable(props: ItemsTableProps) {
                 <th className="text-right">Cost: <span className="font-light">$0 USD</span></th>
             </tr>
             {
-                props.items.map((x) => (
-                    <tr className="border-b border-black">
+                props.items.map((x, iter) => (
+                    <tr key={iter} className="border-b border-black">
                         <td className="p-5">{x.name}</td>
                         <td>{x.stock}</td>
                         <td>{x.price}</td>
