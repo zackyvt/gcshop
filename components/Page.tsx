@@ -18,13 +18,13 @@ export default function Page(props: { pageName: string, children: JSX.Element[] 
                 <meta property="og:url" content="https://metatags.io/" />
                 <meta property="og:title" content="GCShop - Best Giftcards Provider" />
                 <meta property="og:description" content="GCShop is the best giftcard provider in the market. We offer the lowest prices, up to 50% off the original price with options ranging from $100 giftcards to $2000 gift cards. Our giftcards are tested and high quality (we even offer a full refund for broken gift cards). We accept payment anonymously through the Bitcoin network." />
-                <meta property="og:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png" />
+                <meta property="og:image" content="/screenshot.png" />
 
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="https://metatags.io/" />
                 <meta property="twitter:title" content="GCShop - Best Giftcards Provider" />
                 <meta property="twitter:description" content="GCShop is the best giftcard provider in the market. We offer the lowest prices, up to 50% off the original price with options ranging from $100 giftcards to $2000 gift cards. Our giftcards are tested and high quality (we even offer a full refund for broken gift cards). We accept payment anonymously through the Bitcoin network." />
-                <meta property="twitter:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png" />
+                <meta property="twitter:image" content="/screenshot.png" />
             </Head>
             <div className="font-sans p-12 sm:p-16 md:p-20 lg:p-24 xl:p-36 2xl:p-48 !pt-10 !pb-0 flex flex-col min-h-screen">
                 <Header current_page={props.pageName} />
