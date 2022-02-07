@@ -16,12 +16,14 @@ function createEmail(email: string, cost: number, item: string, giftcard_number:
 }
 
 export default async function handler(req: any, res: any) {
-    let purchase_id = req.query.id;
+    let purchase_id = req.query.checkoutId;
     await dbConnect();
 
-    let purchase = await Purchase.findById(purchase_id);
-    console.log(purchase_id);
-    purchase = purchase.toObject();
+    let purchase = await Purchase.findOne({ checkout_id: purchase_id });
+    if(purchase.completed === true) {
+        res.redirect("/success?purchase_id=" + purchase._id);
+        return;
+    }
     purchase.completed = true;
     await purchase.save();
 
@@ -50,5 +52,5 @@ export default async function handler(req: any, res: any) {
         html: createEmail(purchase.email, purchase.cost, purchase.item.name, curr_stock), // html body
     });
 
-    res.redirect("/success?purchase_id=" + purchase_id);
+    res.redirect("/success?purchase_id=" + purchase._id);
 }

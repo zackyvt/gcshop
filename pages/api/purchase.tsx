@@ -51,7 +51,7 @@ export default async function handler(req: any, res: any) {
                         },
                         couponCode: (coupon != null ? coupon.name : null),
                         cost: cost,
-                        _id: mongoose.Types.ObjectId(n_response.data.id)
+                        checkout_id: n_response.data.id
                     });
         
                     res.redirect(n_response.data.url);

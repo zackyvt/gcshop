@@ -9,7 +9,9 @@ const purchaseSchema = new Schema({
         item_id: String
     },
     couponCode: String,
-    cost: Number
+    cost: Number,
+    checkout_id: String,
+    completed: Boolean
 });
 
 export default mongoose.models.Purchase || mongoose.model('Purchase', purchaseSchema);
