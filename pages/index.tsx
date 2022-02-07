@@ -35,7 +35,7 @@ export default function Home(props: Props) {
                         You can contact us in one of two ways: either through discord or through email. If you join our discord server, you will be able to open a ticket if you need any support in regards to using our site. You might get slower replies if you contact us through email.
                     </p>
                     <div className="flex flex-col md:flex-row mt-10">
-                        <button onClick={() => window.location.href = "#"} className="hover:scale-105 transition-all mb-3 p-2.5 pl-12 pr-12 bg-indigo-800 text-white font-bold rounded-md mr-0 md:mr-4">Join our Discord</button>
+                        <button onClick={() => window.location.href = "https://discord.gg/9T97P9KAXa"} className="hover:scale-105 transition-all mb-3 p-2.5 pl-12 pr-12 bg-indigo-800 text-white font-bold rounded-md mr-0 md:mr-4">Join our Discord</button>
                         <button onClick={() => window.location.href = "mailto:youandgha@gmail.com"} className="hover:scale-105 transition-all mb-3 p-2.5 pl-12 pr-12 bg-indigo-800 text-white font-bold rounded-md">Email Us</button>
                     </div>
                 </div>
