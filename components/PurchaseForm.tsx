@@ -13,20 +13,16 @@ function PurchaseInfo(props: {name: string, price: number}) {
     )
 }
 
-interface PurchaseFormProps {
-    coupon_code: string | undefined,
-    email: string | undefined,
-    purchase_created: boolean,
-    order_done: boolean,
+interface PurchaseFlowProps {
+    category_id: string,
+    item_id: string,
     name: string,
-    price: number,
-    button_callback: (email: string, coupon: string) => void
+    price: number
 }
 
-export default function PurchaseForm(props: PurchaseFormProps) {
-    let [completed, set_completed] = useState(props.purchase_created);
-    let [email, setEmail] = useState(props.email ? props.email : "");
-    let [coupon, setCoupon] = useState(props.coupon_code ? props.coupon_code : "");
+export default function PurchaseForm(props: PurchaseFlowProps) {
+    let [email, setEmail] = useState("");
+    let [coupon, setCoupon] = useState("");
     const validateEmail = (email: string) => {
         return String(email)
             .toLowerCase()
@@ -35,31 +31,21 @@ export default function PurchaseForm(props: PurchaseFormProps) {
             );
     };
     const formSubmit = (e: any) => {
-        e.preventDefault();
-        if(completed) {
-            set_completed(false);
-            props.button_callback(email, coupon);
-        }
-        if(email != "" && !completed) {
-            set_completed(true);
-            props.button_callback(email, coupon);
-        }
+        if(email == "") e.preventDefault();
     };
     return (
         <div className="w-full md:w-1/2">
             <PurchaseInfo name={props.name} price={props.price}/>
-            <form className="flex flex-col mt-12" onSubmit={formSubmit}>
-            <label className="mb-3" htmlFor="email">Coupon code:</label>
-                <input readOnly={completed} onChange={(e) => setCoupon(e.target.value)} value={coupon} className="border-gray-400 border outline-indigo-800 p-2.5 text-sm rounded-md" name="ccode" type="text" placeholder="Coupon code..." />
+            <form className="flex flex-col mt-12" onSubmit={formSubmit} action="/api/purchase" method="POST">
+                <input readOnly={true} className="hidden" name="name" value={props.name} />
+                <input readOnly={true} className="hidden" name="item_id" value={props.item_id} />
+                <input readOnly={true} className="hidden" name="category_id" value={props.category_id} />
+                <input readOnly={true} className="hidden" name="price" value={props.price} />
+                <label className="mb-3" htmlFor="email">Coupon code:</label>
+                <input onChange={(e) => setCoupon(e.target.value)} value={coupon} className="border-gray-400 border outline-indigo-800 p-2.5 text-sm rounded-md" name="couponCode" type="text" placeholder="Coupon code..." />
                 <label className="mb-3 mt-6" htmlFor="email">Email address for delivery:</label>
-                <input readOnly={completed} onChange={(e) => setEmail(e.target.value)} value={email} className="border-gray-400 border outline-indigo-800 p-2.5 text-sm rounded-md" name="email" type="email" placeholder="Email..." />
-                {
-                    props.order_done ? <></> :
-                        !completed ?
-                            <button className={(!validateEmail(email) ? "opacity-50 " : "hover:scale-105 opacity-100 ") + "transition-all mt-10 p-2.5 pl-12 pr-12 bg-indigo-800 text-white font-bold rounded-md"}>Confirm Purchase</button>
-                            :
-                            <button className="hover:scale-105 opacity-100 transition-all mt-10 p-2.5 pl-12 pr-12 bg-red-500 text-white font-bold rounded-md">Cancel Purchase</button>
-                }
+                <input name="email" onChange={(e) => setEmail(e.target.value)} value={email} className="border-gray-400 border outline-indigo-800 p-2.5 text-sm rounded-md" type="email" placeholder="Email..." />
+                <button className={(!validateEmail(email) ? "opacity-50 " : "hover:scale-105 opacity-100 ") + "transition-all mt-10 p-2.5 pl-12 pr-12 bg-indigo-800 text-white font-bold rounded-md"}>Confirm Purchase</button>
             </form>
         </div>
     )

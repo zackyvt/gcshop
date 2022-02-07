@@ -1,7 +1,3 @@
-
-import Head from "next/head";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import Hero from "../components/Hero";
 import BuySection from "../components/BuySection";
 import dbConnect from "../lib/dbConnect";
