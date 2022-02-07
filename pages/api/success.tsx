@@ -6,13 +6,12 @@ import Category from "../../models/Category";
 import ItemStock from "../../models/ItemStock";
 import email_template from "../../lib/emailTemplate";
 
-function createEmail(email: string, cost: number, item: string, giftcard_number: string) {
+function createEmail(_email: string, cost: number, item: string, giftcard_number: string, coupon: string) {
     return email_template
-        .replace("email_address", email)
-        .replace("cost_number", "$" + cost + " USD")
-        .replace("quantity_number", "1")
-        .replace("giftcard_number", giftcard_number)
-        .replace("item_name", item);
+        .replace("{cost}", String(cost))
+        .replace("{giftcard}", giftcard_number)
+        .replace("{item_name}", item)
+        .replace("{coupon_code}", coupon ? coupon : "-");
 }
 
 export default async function handler(req: any, res: any) {
@@ -49,7 +48,7 @@ export default async function handler(req: any, res: any) {
         from: process.env.GMAIL_ADDRESS, // sender address
         to: purchase.email, // list of receivers
         subject: "Your giftcard purchase has arrived!", // Subject line
-        html: createEmail(purchase.email, purchase.cost, purchase.item.name, curr_stock), // html body
+        html: createEmail(purchase.email, purchase.cost, purchase.item.name, curr_stock, purchase.couponCode), // html body
     });
 
     res.redirect("/success?purchase_id=" + purchase._id);

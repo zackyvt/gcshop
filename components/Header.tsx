@@ -25,7 +25,7 @@ export default function Header(props: {current_page: string}) {
             <Navbar current_page={props.current_page} nav_items={[
                 {name: "Home", path: "/"},
                 {name: "Buy", path: "/#buy"},
-                {name: "Warranty", path: "/#warrant"},
+                {name: "Warranty", path: "/#warranty"},
                 {name: "Contact", path: "/#contact"}
             ]}/>
             <div className="flex-grow block md:hidden"/>
